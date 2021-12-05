@@ -39,14 +39,14 @@ def detectEyesAndPupils() :
 
         roi_gray = cv2.GaussianBlur(roi_gray, (7,7), 0)
 
-        # 홍채 탐색
+        # 동공 중심 찾기
         _, threshold = cv2.threshold(roi_gray, 40, 255, cv2.THRESH_BINARY_INV)
         contours, _ = cv2.findContours(threshold, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         contours = sorted(contours, key=lambda x: cv2.contourArea(x), reverse=True)
 
         for cnt in contours:
             (x,y,w,h) = cv2.boundingRect(cnt)
-            cv2.rectangle(roi_color, (x,y), (x+w, y+h), (255, 0, 0), 2) # 홍채 사각형 그리기
+            cv2.rectangle(roi_color, (x,y), (x+w, y+h), (255, 0, 0), 2) # 홍채 사각형 그리기 (흑백으로 분류)
             cv2.line(roi_color, (x+int(w/2), 0), (x+int(w/2), rows), (0, 255, 0), 1)    # 동공 중심을 지나는 눈 세로선
             cv2.line(roi_color, (0, y+int(h/2)), (cols, y+int(h/2)), (0,255,0), 1)  # 동공 중심을 지나는 눈 가로선
             cv2.line(roi_color, (x+int(w/2), y+int(h/2)), (x+int(w/2), y+int(h/2)), (0, 0, 255), 2) # 동공 중심
