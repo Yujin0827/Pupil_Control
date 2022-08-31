@@ -1,7 +1,5 @@
 # Pupil_Control
 
-- Pupil control project created using Python
-
 This project is a project that controls screen scrolling through eye movements.<br>
 It was developed to participate in the open source SW development contest in the school and received a silver prize.<br><br>
 
